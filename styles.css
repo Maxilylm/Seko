@@ -735,95 +735,59 @@ html {
     scroll-behavior: smooth;
 }
 
-
-/* para el celu */
+/* para celu */
 @media (max-width: 768px){
 
-  /* Container */
-  .container{
-    padding: 0 16px;
+  html, body { width: 100%; overflow-x: hidden; }
+
+  /* por si tenías overrides raros en hero */
+  .hero .container{
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 16px !important;
   }
 
-  /* Header */
-  .nav-container{
-    padding: 0 16px;
-  }
-
-  .logo{
-    height: 56px;
-    margin-left: 0;
-    padding: 0.5rem 0;
-    max-width: 220px;
-  }
-
-  /* Hero: pasa de 2 columnas a 1 */
-  .hero{
-    padding: 2.5rem 0;
-    min-height: auto;
-  }
-
+  /* en mobile NO grid: lo hacemos columna sí o sí */
   .hero-content{
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+  }
+
+  .hero-text{
+    width: 100% !important;
+    max-width: 520px;
     text-align: center;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .hero-title{
-    font-size: 2.2rem;
+    font-size: 2.2rem !important;
     line-height: 1.15;
-    white-space: normal; /* por si lo habías puesto nowrap */
   }
 
   .hero-subtitle{
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 1rem !important;
   }
 
-  .hero-buttons{
-    justify-content: center;
-  }
-
-  .hero-features{
-    justify-content: center;
-    gap: 1rem;
-  }
+  .hero-buttons{ justify-content: center; }
+  .hero-features{ justify-content: center; gap: 1rem; }
 
   .hero-image{
-    margin-top: 0; /* evita que quede bajísima */
+    width: 100% !important;
     display: flex;
     justify-content: center;
+    margin: 0 !important;
   }
 
+  /* clave: si vos la bajaste con 16rem, en mobile lo anulamos */
   .hero-placeholder{
+    margin-top: 0 !important;
     width: min(340px, 100%);
-    height: auto;
     max-width: 340px;
     max-height: 340px;
-    margin-top: 0; /* sacá el 16rem en mobile */
-  }
-
-  /* Nosotros */
-  .nosotros{
-    padding: 3rem 0;
-  }
-
-  .nosotros-text{
-    max-width: 100%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .nosotros-text p{
-    font-size: 1rem;
-  }
-
-  .features{
-    justify-content: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-  }
-
-  .feature{
-    font-size: 1rem;
   }
 }
