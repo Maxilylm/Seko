@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Instagram, Facebook, MessageCircle } from 'lucide-react'
+import { Instagram, MessageCircle } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -23,21 +23,18 @@ export function Footer() {
           {/* Social Links */}
           <div className="flex gap-6 mb-8">
             <Link
-              href="#"
+              href="https://www.instagram.com/seko_uy?igsh=MTJ2emVxd296bnJxZQ=="
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:transform hover:-translate-y-1 transition-transform duration-300"
               aria-label="Instagram"
             >
               <Instagram size={24} />
             </Link>
             <Link
-              href="#"
-              className="hover:transform hover:-translate-y-1 transition-transform duration-300"
-              aria-label="Facebook"
-            >
-              <Facebook size={24} />
-            </Link>
-            <Link
-              href="#"
+              href="https://wa.me/59892320595"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:transform hover:-translate-y-1 transition-transform duration-300"
               aria-label="WhatsApp"
             >

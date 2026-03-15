@@ -19,7 +19,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Teléfono',
-    content: '+548 099 221 770 - +548 092 212 416',
+    content: '+598 92 320 595',
   },
   {
     icon: MapPin,

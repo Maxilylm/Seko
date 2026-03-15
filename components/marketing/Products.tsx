@@ -1,5 +1,10 @@
+'use client'
+
 import Image from 'next/image'
+import { ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useCartStore } from '@/store/cart'
+import { formatPrice } from '@/lib/utils'
 
 const products = [
   {
@@ -24,6 +29,8 @@ const products = [
 ]
 
 export function Products() {
+  const addItem = useCartStore((state) => state.addItem)
+
   return (
     <section id="productos" className="py-20 bg-[#FFF8DC]">
       <div className="container mx-auto px-4">
@@ -53,7 +60,7 @@ export function Products() {
                 {product.name}
               </h3>
               <div className="text-2xl font-bold text-[#823720] mb-4 text-center">
-                ${product.price}
+                {formatPrice(product.price)}
               </div>
               {product.description && (
                 <p className="text-[#6D4C41] mb-4 text-center flex-grow">
@@ -61,8 +68,17 @@ export function Products() {
                 </p>
               )}
               <Button
-                className="w-full bg-[#823720] hover:bg-[#A0522D] text-[#FFF8DC] transition-all hover:-translate-y-1"
+                onClick={() =>
+                  addItem({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                  })
+                }
+                className="w-full bg-[#823720] hover:bg-[#A0522D] text-[#FFF8DC] transition-all hover:-translate-y-1 gap-2"
               >
+                <ShoppingCart size={18} />
                 Agregar al Carrito
               </Button>
             </div>
@@ -72,4 +88,3 @@ export function Products() {
     </section>
   )
 }
-

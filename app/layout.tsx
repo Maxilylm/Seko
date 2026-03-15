@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Header } from '@/components/shared/Header'
 import { Footer } from '@/components/shared/Footer'
+import { Cart } from '@/components/shared/Cart'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -42,6 +43,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <Cart />
       </body>
     </html>
   )
