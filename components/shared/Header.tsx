@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ShoppingBag } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useCartStore } from '@/store/cart'
 
 const navLinks = [
   { href: '#inicio', label: 'Inicio' },
@@ -16,6 +17,8 @@ const navLinks = [
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const openCart = useCartStore((state) => state.openCart)
+  const totalItems = useCartStore((state) => state.totalItems)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +43,8 @@ export function Header() {
   const handleLinkClick = () => {
     setIsMenuOpen(false)
   }
+
+  const itemCount = totalItems()
 
   return (
     <header
@@ -72,15 +77,31 @@ export function Header() {
             ))}
           </ul>
 
-          {/* Mobile Menu Toggle - larger touch target (44x44 min) */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-[#FFF8DC] p-3 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
-            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Cart Button */}
+            <button
+              onClick={openCart}
+              className="relative text-[#FFF8DC] p-3 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-[#F5E6D3] transition-colors"
+              aria-label="Abrir carrito"
+            >
+              <ShoppingBag size={24} />
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 bg-[#CD853F] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {itemCount > 9 ? '9+' : itemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden text-[#FFF8DC] p-3 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+              aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation with animation */}
