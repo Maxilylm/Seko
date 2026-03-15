@@ -58,7 +58,10 @@
   }
 }
 
-/* Font is loaded via next/font/google in layout.tsx */
+/* Font loaded via <link> in layout.tsx */
+body {
+  font-family: 'Poppins', sans-serif;
+}
 
 /* Mobile touch improvements */
 @media (max-width: 768px) {
