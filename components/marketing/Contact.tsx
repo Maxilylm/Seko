@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { contactFormSchema, type ContactFormData } from '@/lib/validations'
+import { cn } from '@/lib/utils'
 
 const contactInfo = [
   {
@@ -147,7 +148,16 @@ export function Contact() {
             </Button>
 
             {submitMessage && (
-              <p className="text-center text-sm mt-4">{submitMessage}</p>
+              <p
+                className={cn(
+                  'text-center text-sm mt-4 font-medium',
+                  submitMessage.startsWith('¡Gracias')
+                    ? 'text-green-600'
+                    : 'text-red-500'
+                )}
+              >
+                {submitMessage}
+              </p>
             )}
           </form>
 

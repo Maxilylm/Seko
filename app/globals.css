@@ -58,16 +58,19 @@
   }
 }
 
-/* Custom Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* Font is loaded via next/font/google in layout.tsx */
 
-body {
-  font-family: 'Poppins', sans-serif;
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
-/* Smooth Scroll */
+/* Smooth Scroll with header offset */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 /* Hero Background */

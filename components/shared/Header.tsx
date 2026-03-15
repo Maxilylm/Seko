@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -26,6 +25,18 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMenuOpen])
+
   const handleLinkClick = () => {
     setIsMenuOpen(false)
   }
@@ -41,14 +52,9 @@ export function Header() {
         <div className="flex items-center justify-between px-4 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center py-4">
-            <Image
-              src="/assets/logo_backup.pdf"
-              alt="Seko Logo"
-              width={120}
-              height={80}
-              className="h-20 w-auto object-contain"
-              priority
-            />
+            <span className="text-3xl font-bold font-['Kalam'] text-[#FFF8DC] tracking-wide">
+              Seko
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -66,36 +72,39 @@ export function Header() {
             ))}
           </ul>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle - larger touch target (44x44 min) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-[#FFF8DC] p-2"
-            aria-label="Toggle menu"
+            className="lg:hidden text-[#FFF8DC] p-3 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="lg:hidden bg-[#823720] border-t border-[#FFF8DC]/20">
-            <ul className="flex flex-col py-4">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={handleLinkClick}
-                    className="block px-6 py-3 text-[#FFF8DC] font-medium hover:bg-[#A0522D] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Mobile Navigation with animation */}
+        <div
+          className={cn(
+            'lg:hidden bg-[#823720] border-t border-[#FFF8DC]/20 overflow-hidden transition-all duration-300 ease-in-out',
+            isMenuOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0 border-t-0'
+          )}
+        >
+          <ul className="flex flex-col py-2">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className="block px-6 py-4 text-[#FFF8DC] font-medium hover:bg-[#A0522D] transition-colors text-lg"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
     </header>
   )
 }
-
