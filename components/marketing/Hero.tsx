@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 
 export function Hero() {
   return (
-    <section id="inicio" className="hero-bg min-h-[90vh] flex items-center py-16">
+    <section id="inicio" className="hero-bg min-h-[90dvh] flex items-center py-16">
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <div className="w-full max-w-4xl text-center">
